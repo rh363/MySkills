@@ -1,6 +1,6 @@
 # Attributions
 
-Le skill di `alex-skills` sono **originali** — non copie letterali di altri repo. Format, tono, esempi e focus sono stati riscritti da zero per lo stack polyglot personale dell'autore (Python/Go/TypeScript + pattern Seeweb).
+Le skill di `MySkills` sono **originali** — non copie letterali di altri repo. Format, tono, esempi e focus sono stati riscritti da zero per lo stack polyglot personale dell'autore (Python/Go/TypeScript + pattern Seeweb).
 
 Tuttavia, i **concept e il pattern generale** di alcune skill sono ispirati a lavori esistenti di qualità, a cui va il credito per aver stabilito lo stato dell'arte.
 

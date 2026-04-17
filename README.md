@@ -1,4 +1,4 @@
-# MySkills (`alex-skills`)
+# MySkills
 
 Plugin **Claude Code** personale, installabile via marketplace, con 9 skill di sviluppo adattate a stack polyglot (Python/Go/TypeScript) e pattern backend distribuito (Celery, Keycloak/OIDC, hexagonal architecture).
 
@@ -17,8 +17,8 @@ Vedi [ATTRIBUTIONS.md](ATTRIBUTIONS.md) per le attribuzioni di ispirazione.
 Da dentro Claude Code:
 
 ```
-/plugin marketplace add rh363/alex-skills
-/plugin install alex-dev-skills@alex-skills
+/plugin marketplace add rh363/MySkills
+/plugin install alex-dev-skills@MySkills
 ```
 
 Claude Code attiverà automaticamente le skill rilevanti in base a quello che stai facendo. Puoi anche invocarle esplicitamente: `usa tdd-prove-it per questo fix`.
@@ -52,7 +52,7 @@ Claude Code attiverà automaticamente le skill rilevanti in base a quello che st
 ## Struttura del repo
 
 ```
-alex-skills/
+MySkills/
 ├── .claude-plugin/
 │   └── marketplace.json
 ├── plugins/
