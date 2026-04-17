@@ -1,6 +1,6 @@
 # MySkills
 
-Plugin **Claude Code** personale, installabile via marketplace, con 14 skill + 2 agent di sviluppo adattati a stack polyglot (Python/Go/TypeScript) e pattern backend distribuito (Celery, Keycloak/OIDC, hexagonal architecture).
+Plugin **Claude Code** personale, installabile via marketplace, con 14 skill + 3 agent di sviluppo adattati a stack polyglot (Python/Go/TypeScript) e pattern backend distribuito (Celery, Keycloak/OIDC, hexagonal architecture).
 
 - **Autore**: Alex Massaroni ([rh363](https://github.com/rh363))
 - **Licenza**: MIT
@@ -8,7 +8,7 @@ Plugin **Claude Code** personale, installabile via marketplace, con 14 skill + 2
 
 ## Perché esiste
 
-I bundle di skill generici (1400+ skill) sono rumorosi e portano rischi di sicurezza. I repo full-stack TS-centric non coprono il mio stack (Python/Go backend + SvelteKit/Flutter frontend). `MySkills` è il compromesso: **14 skill + 2 agent**, ognuna pensata per essere usata almeno una volta a settimana, riscritte da zero ispirandosi a fonti battle-tested ([obra/superpowers](https://github.com/obra/superpowers), [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills), [anthropics/skills](https://github.com/anthropics/skills)).
+I bundle di skill generici (1400+ skill) sono rumorosi e portano rischi di sicurezza. I repo full-stack TS-centric non coprono il mio stack (Python/Go backend + SvelteKit/Flutter frontend). `MySkills` è il compromesso: **14 skill + 3 agent**, ognuna pensata per essere usata almeno una volta a settimana, riscritte da zero ispirandosi a fonti battle-tested ([obra/superpowers](https://github.com/obra/superpowers), [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills), [anthropics/skills](https://github.com/anthropics/skills)).
 
 Vedi [ATTRIBUTIONS.md](ATTRIBUTIONS.md) per le attribuzioni di ispirazione.
 
@@ -59,7 +59,7 @@ Claude Code attiverà automaticamente le skill rilevanti in base a quello che st
 | [`celery-idempotency`](plugins/alex-dev-skills/skills/celery-idempotency/SKILL.md) | Task Celery con side effect: idempotency key, state guard SQL, distributed lock. |
 | [`keycloak-oidc-patterns`](plugins/alex-dev-skills/skills/keycloak-oidc-patterns/SKILL.md) | Integrazione Keycloak/OIDC: Auth Code + PKCE, JWT RS256, state/nonce, JWKS caching. |
 
-## I 2 agent
+## I 3 agent
 
 Gli agent orchestrano più skill in una pipeline obbligata. Sono invocati esplicitamente (es. `usa tdd-bug-fixer su questo bug`) o auto-attivati quando Claude Code riconosce il contesto dalla `description`.
 
@@ -67,6 +67,7 @@ Gli agent orchestrano più skill in una pipeline obbligata. Sono invocati esplic
 |---|---|---|
 | [`tdd-bug-fixer`](plugins/alex-dev-skills/agents/tdd-bug-fixer.md) | Bug report o fix richiesto: forza pipeline reproduce → failing test → fix minimale → regression guard. | `tdd-prove-it` + `systematic-debugging` |
 | [`security-reviewer`](plugins/alex-dev-skills/agents/security-reviewer.md) | Review read-only di diff/PR prima del merge: secrets, input boundary, OWASP, auth/authz, supply chain. | `owasp-security-focused` + `secrets-hygiene` |
+| [`release-bumper`](plugins/alex-dev-skills/agents/release-bumper.md) | Preparazione release: legge `[Unreleased]`, decide bump SemVer, aggiorna tutti i manifest, sposta sezione con data ISO, aggiorna link compare, genera skeleton `MIGRATION.md` su MAJOR, crea commit + tag annotata. **Non pusha** — quello resta manuale. | `semver-keepachangelog` |
 
 ## Struttura del repo
 
@@ -81,7 +82,7 @@ MySkills/
 │       ├── skills/
 │       │   └── <14 skills>/SKILL.md
 │       └── agents/
-│           └── <2 agents>.md
+│           └── <3 agents>.md
 ├── README.md
 ├── ATTRIBUTIONS.md
 ├── LICENSE
