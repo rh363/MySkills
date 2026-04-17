@@ -12,7 +12,7 @@
     {
       "name": "alex-dev-skills",
       "source": "./plugins/alex-dev-skills",
-      "description": "Bundle di 9 skill: TDD prove-it, systematic debugging, context engineering, OWASP security, git worktrees, secrets hygiene, hexagonal architecture, Celery idempotency, Keycloak/OIDC patterns.",
+      "description": "Bundle di 11 skill + 2 agent: TDD prove-it, systematic debugging, context engineering, OWASP security, git worktrees, secrets hygiene, hexagonal architecture, Celery idempotency, Keycloak/OIDC patterns, API contract-first, dependency upgrade discipline. Agent: tdd-bug-fixer, security-reviewer.",
       "category": "development",
       "keywords": [
         "tdd",
