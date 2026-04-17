@@ -1,6 +1,6 @@
 # MySkills
 
-Plugin **Claude Code** personale, installabile via marketplace, con 11 skill + 2 agent di sviluppo adattati a stack polyglot (Python/Go/TypeScript) e pattern backend distribuito (Celery, Keycloak/OIDC, hexagonal architecture).
+Plugin **Claude Code** personale, installabile via marketplace, con 12 skill + 2 agent di sviluppo adattati a stack polyglot (Python/Go/TypeScript) e pattern backend distribuito (Celery, Keycloak/OIDC, hexagonal architecture).
 
 - **Autore**: Alex Massaroni ([rh363](https://github.com/rh363))
 - **Licenza**: MIT
@@ -8,7 +8,7 @@ Plugin **Claude Code** personale, installabile via marketplace, con 11 skill + 2
 
 ## Perché esiste
 
-I bundle di skill generici (1400+ skill) sono rumorosi e portano rischi di sicurezza. I repo full-stack TS-centric non coprono il mio stack (Python/Go backend + SvelteKit/Flutter frontend). `MySkills` è il compromesso: **11 skill + 2 agent**, ognuna pensata per essere usata almeno una volta a settimana, riscritte da zero ispirandosi a fonti battle-tested ([obra/superpowers](https://github.com/obra/superpowers), [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills), [anthropics/skills](https://github.com/anthropics/skills)).
+I bundle di skill generici (1400+ skill) sono rumorosi e portano rischi di sicurezza. I repo full-stack TS-centric non coprono il mio stack (Python/Go backend + SvelteKit/Flutter frontend). `MySkills` è il compromesso: **12 skill + 2 agent**, ognuna pensata per essere usata almeno una volta a settimana, riscritte da zero ispirandosi a fonti battle-tested ([obra/superpowers](https://github.com/obra/superpowers), [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills), [anthropics/skills](https://github.com/anthropics/skills)).
 
 Vedi [ATTRIBUTIONS.md](ATTRIBUTIONS.md) per le attribuzioni di ispirazione.
 
@@ -23,7 +23,7 @@ Da dentro Claude Code:
 
 Claude Code attiverà automaticamente le skill rilevanti in base a quello che stai facendo. Puoi anche invocarle esplicitamente: `usa tdd-prove-it per questo fix`.
 
-## Le 11 skill
+## Le 12 skill
 
 ### Core — universali
 
@@ -47,6 +47,7 @@ Claude Code attiverà automaticamente le skill rilevanti in base a quello che st
 |---|---|
 | [`api-contract-first`](plugins/alex-dev-skills/skills/api-contract-first/SKILL.md) | Progetti o modifichi API HTTP/gRPC con client e server in linguaggi diversi: OpenAPI/Protobuf come single source of truth, codegen, `oasdiff` in CI. |
 | [`dependency-upgrade-discipline`](plugins/alex-dev-skills/skills/dependency-upgrade-discipline/SKILL.md) | Configuri Renovate/Dependabot o valuti upgrade: batched settimanali, changelog review, SCA (pip-audit / govulncheck / npm audit) in CI. |
+| [`semver-keepachangelog`](plugins/alex-dev-skills/skills/semver-keepachangelog/SKILL.md) | Decidi un version bump, prepari release, aggiorni CHANGELOG o definisci policy breaking: SemVer 2.0 + Keep a Changelog + ADR + MIGRATION.md. |
 
 ### Custom Seeweb — il differenziatore
 
@@ -76,7 +77,7 @@ MySkills/
 │       ├── .claude-plugin/
 │       │   └── plugin.json
 │       ├── skills/
-│       │   └── <11 skills>/SKILL.md
+│       │   └── <12 skills>/SKILL.md
 │       └── agents/
 │           └── <2 agents>.md
 ├── README.md

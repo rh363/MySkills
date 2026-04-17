@@ -1,7 +1,7 @@
 {
   "name": "alex-dev-skills",
   "version": "0.1.0",
-  "description": "11 skill + 2 agent di sviluppo per stack polyglot Python/Go/TypeScript con pattern architetturali, contract-first API, dependency discipline e sicurezza battle-tested.",
+  "description": "12 skill + 2 agent di sviluppo per stack polyglot Python/Go/TypeScript con pattern architetturali, contract-first API, dependency discipline, versioning/changelog e sicurezza battle-tested.",
   "author": {
     "name": "Alex Massaroni",
     "url": "https://github.com/rh363"
@@ -20,6 +20,9 @@
     "security",
     "openapi",
     "renovate",
-    "dependency-management"
+    "dependency-management",
+    "semver",
+    "changelog",
+    "adr"
   ]
 }
