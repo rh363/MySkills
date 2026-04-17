@@ -1,13 +1,13 @@
 {
-  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "alex-skills",
-  "version": "0.1.0",
-  "description": "Agent skills personali per sviluppo polyglot (Python/Go/TS) con focus su hexagonal architecture, Celery, Keycloak/OIDC e pratiche di sicurezza. Ispirato ai pattern di obra/superpowers e Addy Osmani, adattato allo stack Seeweb.",
   "owner": {
     "name": "Alex Massaroni",
     "url": "https://github.com/rh363"
   },
-  "license": "MIT",
+  "metadata": {
+    "description": "Agent skills personali per sviluppo polyglot (Python/Go/TS) con focus su hexagonal architecture, Celery, Keycloak/OIDC e pratiche di sicurezza. Ispirato ai pattern di obra/superpowers e Addy Osmani, adattato allo stack Seeweb.",
+    "version": "0.1.0"
+  },
   "plugins": [
     {
       "name": "alex-dev-skills",
@@ -25,13 +25,6 @@
         "go",
         "typescript"
       ]
-    }
-  ],
-  "categories": [
-    {
-      "name": "Development",
-      "description": "Skill per il ciclo di sviluppo quotidiano",
-      "plugins": ["alex-dev-skills"]
     }
   ]
 }

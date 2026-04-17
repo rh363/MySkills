@@ -18,7 +18,5 @@
     "keycloak",
     "hexagonal-architecture",
     "security"
-  ],
-  "category": "development",
-  "strict": false
+  ]
 }

@@ -1,6 +1,6 @@
 ---
 name: tdd-prove-it
-description: Usa questa skill quando stai per implementare una feature, fixare un bug, o modificare comportamento esistente. Enforce il pattern "Prove-It":  riproduci il problema con un test che fallisce PRIMA di scrivere il fix. Applicabile a Python (pytest), Go (testing/testify), TypeScript (vitest/jest).
+description: Usa questa skill quando stai per implementare una feature, fixare un bug, o modificare comportamento esistente. Enforce il pattern Prove-It — riproduci il problema con un test che fallisce PRIMA di scrivere il fix. Applicabile a Python (pytest), Go (testing/testify), TypeScript (vitest/jest).
 ---
 
 # TDD Prove-It
