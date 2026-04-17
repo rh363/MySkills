@@ -1,0 +1,24 @@
+{
+  "name": "alex-dev-skills",
+  "version": "0.1.0",
+  "description": "Skill di sviluppo per stack polyglot Python/Go/TypeScript con pattern architetturali e di sicurezza battle-tested.",
+  "author": {
+    "name": "Alex Massaroni",
+    "url": "https://github.com/rh363"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/rh363/alex-skills",
+  "repository": "https://github.com/rh363/alex-skills",
+  "keywords": [
+    "python",
+    "go",
+    "typescript",
+    "tdd",
+    "celery",
+    "keycloak",
+    "hexagonal-architecture",
+    "security"
+  ],
+  "category": "development",
+  "strict": false
+}

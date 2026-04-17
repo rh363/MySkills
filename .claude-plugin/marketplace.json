@@ -1,0 +1,37 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "alex-skills",
+  "version": "0.1.0",
+  "description": "Agent skills personali per sviluppo polyglot (Python/Go/TS) con focus su hexagonal architecture, Celery, Keycloak/OIDC e pratiche di sicurezza. Ispirato ai pattern di obra/superpowers e Addy Osmani, adattato allo stack Seeweb.",
+  "owner": {
+    "name": "Alex Massaroni",
+    "url": "https://github.com/rh363"
+  },
+  "license": "MIT",
+  "plugins": [
+    {
+      "name": "alex-dev-skills",
+      "source": "./plugins/alex-dev-skills",
+      "description": "Bundle di 9 skill: TDD prove-it, systematic debugging, context engineering, OWASP security, git worktrees, secrets hygiene, hexagonal architecture, Celery idempotency, Keycloak/OIDC patterns.",
+      "category": "development",
+      "keywords": [
+        "tdd",
+        "debugging",
+        "security",
+        "celery",
+        "keycloak",
+        "hexagonal",
+        "python",
+        "go",
+        "typescript"
+      ]
+    }
+  ],
+  "categories": [
+    {
+      "name": "Development",
+      "description": "Skill per il ciclo di sviluppo quotidiano",
+      "plugins": ["alex-dev-skills"]
+    }
+  ]
+}
