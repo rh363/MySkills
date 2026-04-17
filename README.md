@@ -1,6 +1,6 @@
 # MySkills
 
-Plugin **Claude Code** personale, installabile via marketplace, con 12 skill + 2 agent di sviluppo adattati a stack polyglot (Python/Go/TypeScript) e pattern backend distribuito (Celery, Keycloak/OIDC, hexagonal architecture).
+Plugin **Claude Code** personale, installabile via marketplace, con 14 skill + 2 agent di sviluppo adattati a stack polyglot (Python/Go/TypeScript) e pattern backend distribuito (Celery, Keycloak/OIDC, hexagonal architecture).
 
 - **Autore**: Alex Massaroni ([rh363](https://github.com/rh363))
 - **Licenza**: MIT
@@ -8,7 +8,7 @@ Plugin **Claude Code** personale, installabile via marketplace, con 12 skill + 2
 
 ## Perché esiste
 
-I bundle di skill generici (1400+ skill) sono rumorosi e portano rischi di sicurezza. I repo full-stack TS-centric non coprono il mio stack (Python/Go backend + SvelteKit/Flutter frontend). `MySkills` è il compromesso: **12 skill + 2 agent**, ognuna pensata per essere usata almeno una volta a settimana, riscritte da zero ispirandosi a fonti battle-tested ([obra/superpowers](https://github.com/obra/superpowers), [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills), [anthropics/skills](https://github.com/anthropics/skills)).
+I bundle di skill generici (1400+ skill) sono rumorosi e portano rischi di sicurezza. I repo full-stack TS-centric non coprono il mio stack (Python/Go backend + SvelteKit/Flutter frontend). `MySkills` è il compromesso: **14 skill + 2 agent**, ognuna pensata per essere usata almeno una volta a settimana, riscritte da zero ispirandosi a fonti battle-tested ([obra/superpowers](https://github.com/obra/superpowers), [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills), [anthropics/skills](https://github.com/anthropics/skills)).
 
 Vedi [ATTRIBUTIONS.md](ATTRIBUTIONS.md) per le attribuzioni di ispirazione.
 
@@ -23,7 +23,7 @@ Da dentro Claude Code:
 
 Claude Code attiverà automaticamente le skill rilevanti in base a quello che stai facendo. Puoi anche invocarle esplicitamente: `usa tdd-prove-it per questo fix`.
 
-## Le 12 skill
+## Le 14 skill
 
 ### Core — universali
 
@@ -53,7 +53,9 @@ Claude Code attiverà automaticamente le skill rilevanti in base a quello che st
 
 | Skill | Quando scatta |
 |---|---|
-| [`hexagonal-architecture`](plugins/alex-dev-skills/skills/hexagonal-architecture/SKILL.md) | Nuovo modulo/servizio o refactor: ports & adapters con esempi Python/Go. |
+| [`hexagonal-architecture`](plugins/alex-dev-skills/skills/hexagonal-architecture/SKILL.md) | Base language-agnostic ports & adapters: dependency rule, error flow, anti-pattern. Usa questa per Go o altri stack. |
+| [`hexagonal-python-django`](plugins/alex-dev-skills/skills/hexagonal-python-django/SKILL.md) | Backend Python con Django + Django Ninja: layout `core/`, Container singleton, `<Service>Deps`, NinjaAPI exception handlers, Pydantic Settings, Logger+Audit sempre presenti. |
+| [`frontend-sveltekit-spa`](plugins/alex-dev-skills/skills/frontend-sveltekit-spa/SKILL.md) | Frontend SvelteKit SPA (Svelte 5/4, TS, node adapter): `$lib/svelte/page/<feature>/`, Zod + `$env/dynamic/public`, API client fetch+Zod, `oidc-spa`+Keycloak, Paraglide, micro-frontend iframe + postrobot. |
 | [`celery-idempotency`](plugins/alex-dev-skills/skills/celery-idempotency/SKILL.md) | Task Celery con side effect: idempotency key, state guard SQL, distributed lock. |
 | [`keycloak-oidc-patterns`](plugins/alex-dev-skills/skills/keycloak-oidc-patterns/SKILL.md) | Integrazione Keycloak/OIDC: Auth Code + PKCE, JWT RS256, state/nonce, JWKS caching. |
 
@@ -77,7 +79,7 @@ MySkills/
 │       ├── .claude-plugin/
 │       │   └── plugin.json
 │       ├── skills/
-│       │   └── <12 skills>/SKILL.md
+│       │   └── <14 skills>/SKILL.md
 │       └── agents/
 │           └── <2 agents>.md
 ├── README.md
