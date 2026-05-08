@@ -9,7 +9,8 @@ description: >
   brain", "rollup", "archivio", or any operation involving the
   Daily/Weekly/Monthly/Yearly folders. Other secondbrain skills
   (daily-teardown, daily-standup, rollup) reference this skill as the
-  source of truth for vault layout.
+  source of truth for vault layout. The `session-teardown` skill (mid-day
+  per-session checkpoint into `## Work log`) also depends on this skill.
 metadata:
   version: "0.1.0"
 ---
@@ -137,7 +138,8 @@ The same file is written progressively across the day:
 
 1. **Morning** — `daily-standup` reads `## Planned tasks` (if present), prompts Alex, writes `## Schedule`.
 2. **During the day** — Alex writes free-form notes (anywhere, but `## Work log` is the conventional spot).
-3. **Evening** — `daily-teardown` reads recently-modified vault files, fills `## Done today`, `## Blocked`, `## Retro`, then creates/updates the **next working day's** daily with new `## Planned tasks`, then runs the rollup.
+3. **Between sessions** — `session-teardown` appends a `### Session HH:MM` block under `## Work log` summarising the chat that just ended, before Alex opens a fresh conversation. May run multiple times.
+4. **Evening** — `daily-teardown` reads recently-modified vault files, fills `## Done today`, `## Blocked`, `## Retro`, then creates/updates the **next working day's** daily with new `## Planned tasks`, then runs the rollup.
 
 ## Frontmatter conventions (vault-wide)
 
