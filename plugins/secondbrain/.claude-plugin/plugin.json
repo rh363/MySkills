@@ -1,6 +1,6 @@
 {
   "name": "secondbrain",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Gestisce il second brain di Alex (Obsidian vault): conoscenza della struttura del vault, teardown serale con interview e rollup, standup mattutino con scheduling, checkpoint per-sessione durante la giornata.",
   "author": {
     "name": "Alex Massaroni"
