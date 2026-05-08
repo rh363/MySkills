@@ -28,6 +28,13 @@
         "sveltekit",
         "semver"
       ]
+    },
+    {
+      "name": "secondbrain",
+      "source": "./plugins/secondbrain",
+      "description": "Plugin Cowork per gestire il second brain",
+      "category": "secondbrain",
+      "keywords": []
     }
   ]
 }
