@@ -23,6 +23,12 @@ Codifica la struttura del vault e fornisce i workflow giornalieri:
 | `daily-teardown` | Azione | "fai il teardown", "chiudo la giornata", "review serale" |
 | `rollup` | Azione | "fai il rollup", "archivia il daily" (anche invocata da `daily-teardown`) |
 
+### Slash commands
+
+| Comando | Cosa fa |
+|---|---|
+| `/schedule [task]` | Aggiunge una o più task alla sezione `## Schedule` del daily di oggi, **senza** rifare lo standup. Supporta input rapido (`/schedule 14:00–15:00 Review PR — P1`) o modalità interattiva (`/schedule` senza argomenti). |
+
 Nessun MCP server, hook o agent: il plugin lavora interamente sul filesystem del vault tramite i tool standard (Read, Write, Edit, Glob, Bash).
 
 ## Setup
@@ -56,3 +62,4 @@ Vedi le singole skill per i dettagli operativi:
 - `skills/session-teardown/SKILL.md`
 - `skills/daily-teardown/SKILL.md`
 - `skills/rollup/SKILL.md`
+- `commands/schedule.md`
