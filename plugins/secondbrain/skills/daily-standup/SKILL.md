@@ -10,7 +10,7 @@ description: >
   priorities and time estimates, and writes a `## Schedule` section into
   today's daily note. Always load vault-structure alongside this skill.
 metadata:
-  version: "0.1.0"
+  version: "0.2.0"
 ---
 
 # Daily Standup
@@ -37,7 +37,11 @@ Path: `Daily/YYYY-MM-DD.md`.
 
 ### Step 2 — Read planned tasks
 
-Look for the `## Planned tasks` section. Extract each `- [ ]` item. If the section is missing or empty, ask Alex what they want to do today — collect tasks conversationally.
+Look for the `## Planned tasks` section. Extract each bullet item.
+
+> **Important**: planned tasks are stored as plain bullets (`- Task X`), **without** checkboxes. They acquire `[ ]` only when promoted into `## Schedule` in Step 5. If you find legacy `- [ ]` entries in `## Planned tasks`, treat them as plain bullets and silently normalise them when you rewrite the section.
+
+If the section is missing or empty, ask Alex what they want to do today — collect tasks conversationally.
 
 ### Step 3 — Brief recap
 
@@ -54,11 +58,11 @@ Walk through the task list with Alex. For each task, gather:
 
 Use AskUserQuestion for priority when there are several tasks of unclear ranking. Otherwise stay conversational. If Alex pushes back on a task ("non oggi"), keep it in `## Planned tasks` but mark it with `#postponed`. Do not silently delete tasks.
 
-If Alex wants to add new tasks not in the plan, accept them. Append them to `## Planned tasks` with the `#standup` tag, then schedule them.
+If Alex wants to add new tasks not in the plan, accept them. Append them to `## Planned tasks` (as **plain bullets, no checkbox** — see Step 2) with the `#standup` tag, then schedule them.
 
 ### Step 5 — Write the schedule
 
-Insert a `## Schedule` section right after the H1 title, before `## Work log`. Format:
+Insert a `## Schedule` section right after the H1 title, before `## Work log`. Every Schedule line **must** be a checkbox `- [ ]` — this is the discriminator vs. `## Planned tasks` (plain bullets). Format:
 
 ```markdown
 ## Schedule
@@ -70,6 +74,7 @@ Insert a `## Schedule` section right after the H1 title, before `## Work log`. F
 
 Rules:
 
+- Every line is a `- [ ]` checkbox. When the task is completed during the day, it moves to `## Done today` as `- [x] ~~...~~` (checkbox checked **and** text struck-through). `daily-teardown` formalises this move at end of day; Alex may also do it manually mid-day.
 - Order strictly by P0 → P1 → P2, then by chronological time.
 - If Alex did not give clock times, replace the time slot with `~30min` / `~1h` etc.
 - Preserve any pre-existing `## Schedule` section if Alex re-runs the standup mid-morning — append a `### Update HH:MM` block instead of overwriting.

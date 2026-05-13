@@ -13,7 +13,7 @@ description: >
   end-of-period is detected). Always load vault-structure alongside this
   skill.
 metadata:
-  version: "0.1.0"
+  version: "0.2.0"
 ---
 
 # Daily Teardown
@@ -83,9 +83,17 @@ If today is **Friday**, "tomorrow" = next Monday. If today is **Saturday/Sunday*
 
 Update `Daily/YYYY-MM-DD.md` (today's file) with the gathered content:
 
-- Fill `## Done today` with bullets.
+- Fill `## Done today`. Each completed task is written as **both** a checked checkbox **and** struck-through text:
+  ```markdown
+  - [x] ~~Fix bug X (#project/cloud-firewall)~~
+  - [x] ~~Review PR ermes (#project/ermes)~~
+  ```
+  This applies to:
+  - items Alex explicitly mentioned as done during the gap-filling interview;
+  - any line in `## Schedule` that should now be considered completed — these are **moved** (not copied) from `## Schedule` to `## Done today`, with the `- [ ]` rewritten to `- [x] ~~...~~`. Drop the time slot prefix if it was something like `09:00–11:00` (keep only the task description); keep `#project/...` tags. If Alex completed only part of a Schedule line (e.g. half a long block), split it into a done part and a remaining one (the remaining one stays in `## Schedule` as `- [ ]`).
 - Fill `## Blocked` with bullets, each containing a `#blocked` tag and the unblocking action.
 - Fill `## Retro` (skip if empty).
+- Verify `## Work log` entries are well-formed — each bullet should be prefixed by its local time `HH:MM`, in the canonical form `- **HH:MM — <title>**: <body>`. Do **not** rewrite Alex's prose, but if a Work log bullet is missing the time prefix, ask Alex what time it was and add it. Never invent a time.
 - Update frontmatter: `updated: <today>`, ensure `tags` includes `#daily` and `#teardown`.
 
 Preserve any free-form `## Work log` content Alex wrote during the day — never delete it.
@@ -96,11 +104,13 @@ Compute the target date (see Step 4). Path: `Daily/<target_date>.md`.
 
 If the target file does not exist, create it from the template (frontmatter + section headers, no content). If it already has a `## Planned tasks` section, **append** to it; do not overwrite.
 
-Write each planned task as:
+Write each planned task as a **plain bullet, without checkbox**:
 
 ```markdown
-- [ ] <Task description> (<#project/<name>> if relevant)
+- <Task description> (<#project/<name>> if relevant)
 ```
+
+> **IMPORTANT**: do **not** use `- [ ]` here. Planned tasks acquire `[ ]` only the morning after, when `daily-standup` promotes them into `## Schedule`. This is the discriminator between "plan" and "today's schedule".
 
 Add `#planned` to the file's frontmatter `tags` if not already present.
 

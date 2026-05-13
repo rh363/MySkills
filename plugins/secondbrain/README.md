@@ -7,7 +7,7 @@ Plugin Cowork per gestire il second brain di Alex (Obsidian vault in `~/Document
 Codifica la struttura del vault e fornisce i workflow giornalieri:
 
 - **Standup mattutino**: lettura dei planned tasks, prioritizzazione interattiva, scrittura di una sezione `## Schedule` nel daily di oggi.
-- **Session teardown**: checkpoint tra una sessione di chat e l'altra. Appende un blocco `### Session HH:MM` sotto `## Work log` riassumendo la sessione appena chiusa, senza pianificare il giorno dopo né fare rollup.
+- **Session teardown**: checkpoint tra una sessione di chat e l'altra. Appende una o più voci timestamped (`- **HH:MM — titolo**: ...`) sotto `## Work log` riassumendo la sessione appena chiusa, senza pianificare il giorno dopo né fare rollup.
 - **Teardown serale**: chiusura della giornata. Conversazione libera + domande mirate, pianificazione task per il giorno target, e rollup automatico del daily appena chiuso nella struttura archivio.
 - **Rollup**: cascata progressiva Daily → Weekly → Monthly → Yearly. Invocata automaticamente dal teardown e disponibile manualmente.
 

@@ -9,11 +9,11 @@ description: >
   current conversation into the daily note before opening a fresh chat.
   The skill summarises what was done in the current session, asks a
   couple of targeted questions, and appends the result as a timestamped
-  block to today's `## Work log`. It does NOT plan tomorrow and does
+  entry to today's `## Work log`. It does NOT plan tomorrow and does
   NOT invoke the rollup — those stay with `daily-teardown`. Always load
   vault-structure alongside this skill.
 metadata:
-  version: "0.1.0"
+  version: "0.2.0"
 ---
 
 # Session Teardown
@@ -34,7 +34,7 @@ If Alex says "chiudo la giornata" / "review serale" / "teardown giornaliero", th
 ## Inputs
 
 - Today's date (use `date +%Y-%m-%d` via Bash if uncertain).
-- Current local time (use `date +%H:%M` via Bash) — used as the session block heading.
+- Current local time (use `date +%H:%M` via Bash) — used as the timestamp prefix of every Work log entry. **This is mandatory** — no Work log entry may be written without an `HH:MM` prefix.
 - The vault root: `~/Documents/Obsidian Vault/`.
 - The conversation so far — the main signal of what the session did.
 
@@ -79,30 +79,36 @@ If the session genuinely had loose ends, ask **at most 1–2** further questions
 
 Skip this step entirely on quick sessions.
 
-### Step 5 — Append the session block to `## Work log`
+### Step 5 — Append the session entry to `## Work log`
 
-Append a timestamped subsection under `## Work log`:
+Append a single timestamped bullet (or a small group of bullets, one per topic) under `## Work log`. The canonical form is:
 
 ```markdown
-### Session HH:MM
-- <bullet — what got done, files/paths cited>
-- <bullet — decision or open question>
-- <bullet — blocker, with `#blocked` if external dep>
+- **HH:MM — <short title>**: <one or two sentences. Cite files/paths in backticks. Tag with #project/... if relevant.>
+```
+
+If the session covered multiple distinct topics, write one bullet per topic, each with its own `HH:MM` prefix (the time when that piece of work happened, not necessarily "now"). When in doubt, use the current time for all bullets and group them.
+
+Example:
+
+```markdown
+- **10:00 — Keycloak / AOP staging**: Daniele ha sbloccato il discorso della **raggiungibilità** della VM. Mandata mail ad **Antonello** per fissare la **call** di test integrazione `aopdev` ↔ `oidc-admin-api`. In attesa di risposta. (#project/keycloak-oidc)
+- **11:30 — Refactor billing service**: Estratto `InvoiceCalculator` come port. Restano da migrare 2 use case. (#project/billing)
 ```
 
 Rules:
 
-- Use `### Session HH:MM` (24-hour local time, e.g. `### Session 15:42`).
-- **Always append** to `## Work log` — never overwrite, never reorder previous session blocks.
-- Preserve any free-form notes Alex wrote in `## Work log` himself. Do not refactor them.
-- If an identical session block already exists (same HH:MM), append a discriminator: `### Session HH:MM (b)`.
+- **Every** Work log bullet **must** start with `**HH:MM — <title>**:` (24-hour local time, e.g. `**15:42 — ...**:`). No exceptions. If you cannot determine the time, ask Alex — do not invent it.
+- **Always append** to `## Work log` — never overwrite, never reorder existing entries.
+- Preserve any free-form notes Alex wrote in `## Work log` himself. Do not refactor them. If you notice an entry of Alex's missing the time prefix, leave it alone — `daily-teardown` will prompt to fix it at end of day.
+- If a previous Work log entry has the exact same `HH:MM` prefix and you're adding a separate one, just write a second bullet with the same time — no special discriminator needed; ordering within the same minute is naturally by file order.
 
 ### Step 6 — Carryover into today's `## Planned tasks` (optional)
 
-If Alex flagged tasks to pick up later **today** (not tomorrow), append them to today's own `## Planned tasks` section as:
+If Alex flagged tasks to pick up later **today** (not tomorrow), append them to today's own `## Planned tasks` section as **plain bullets** (no checkbox — see `vault-structure`):
 
 ```markdown
-- [ ] <Task description> (#carryover)
+- <Task description> (#carryover)
 ```
 
 Use the `#carryover` tag so they're distinguishable from tasks planted by yesterday's teardown. If there are no carryovers, skip this step entirely.
@@ -116,9 +122,9 @@ In today's daily note frontmatter:
 
 ### Step 8 — Confirm
 
-Give Alex a one-line wrap-up in Italian: file path updated, time of the session block, and any carryover. Example:
+Give Alex a one-line wrap-up in Italian: file path updated, time of the entries appended, and any carryover. Example:
 
-> "Aggiunto blocco `### Session 15:42` in `Daily/2026-05-08.md`, con 1 carryover (#carryover) nei planned di oggi. Pronta per chiudere la chat."
+> "Aggiunte 2 voci in `## Work log` di `Daily/2026-05-08.md` (15:42), con 1 carryover (#carryover) nei planned di oggi. Pronta per chiudere la chat."
 
 Do **not** invoke `rollup`. Do **not** create or edit any other daily file. The only file you touch is today's `Daily/YYYY-MM-DD.md`.
 
@@ -126,7 +132,7 @@ Do **not** invoke `rollup`. Do **not** create or edit any other daily file. The 
 
 - Italian by default. Technical terms can stay in English.
 - Be brief. A session teardown is a checkpoint, not an interview.
-- Never invent content. If the session was trivial, write a one-bullet block and stop.
-- Always append, never rewrite. Multiple session blocks in a single day are expected and desirable.
+- Never invent content. If the session was trivial, write one bullet and stop — but it still **must** carry the `**HH:MM — ...**:` prefix.
+- Always append, never rewrite. Multiple entries in a single day are expected and desirable.
 - Never touch tomorrow's daily, never run rollup, never set `#teardown` in frontmatter — those are `daily-teardown`'s responsibilities.
 - If Alex follows up with "ok, chiudo la giornata" right after, hand off to `daily-teardown`; do not duplicate its work.

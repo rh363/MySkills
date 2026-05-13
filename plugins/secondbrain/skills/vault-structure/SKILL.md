@@ -12,7 +12,7 @@ description: >
   source of truth for vault layout. The `session-teardown` skill (mid-day
   per-session checkpoint into `## Work log`) also depends on this skill.
 metadata:
-  version: "0.1.0"
+  version: "0.2.0"
 ---
 
 # Vault Structure
@@ -110,15 +110,22 @@ tags: [daily]
 
 ## Schedule
 <!-- written by daily-standup in the morning -->
+<!-- every line is a checkbox; when the task is finished it's moved into ## Done today as `- [x] ~~...~~` (both checked AND struck-through) -->
 - [ ] 09:00–11:00 — Task A
 - [ ] 11:00–12:00 — Task B
 
 ## Work log
 <!-- free-form notes written during the day -->
+<!-- each entry MUST be prefixed by its local time in HH:MM 24h format -->
+<!-- canonical form: `- **HH:MM — <short title>**: <body>` (single bullet, time bolded inside) -->
+- **10:00 — Keycloak / AOP staging**: Daniele ha sbloccato il discorso della **raggiungibilità** della VM. Mandata mail ad **Antonello** per fissare la **call** di test integrazione `aopdev` ↔ `oidc-admin-api`. In attesa di risposta. (#project/keycloak-oidc)
+- **11:30 — Refactor billing service**: Estratto `InvoiceCalculator` come port. Restano da migrare 2 use case. (#project/billing)
 
 ## Done today
-<!-- written by daily-teardown -->
-- ...
+<!-- written by daily-teardown — also: any line in ## Schedule that gets completed during the day is moved here -->
+<!-- completed items are BOTH checked AND struck-through, so they read as "definitely closed" -->
+- [x] ~~Fix bug X (#project/cloud-firewall)~~
+- [x] ~~Review PR ermes (#project/ermes)~~
 
 ## Blocked
 <!-- written by daily-teardown -->
@@ -130,16 +137,18 @@ tags: [daily]
 
 ## Planned tasks
 <!-- planned tasks for THIS day, written by previous day's teardown -->
-- [ ] Task X (#project/cloud-firewall)
-- [ ] Task Y
+<!-- IMPORTANT: planned tasks are written WITHOUT checkboxes — plain bullets only. -->
+<!-- They acquire `[ ]` only when daily-standup promotes them into ## Schedule. -->
+- Task X (#project/cloud-firewall)
+- Task Y
 ```
 
 The same file is written progressively across the day:
 
-1. **Morning** — `daily-standup` reads `## Planned tasks` (if present), prompts Alex, writes `## Schedule`.
-2. **During the day** — Alex writes free-form notes (anywhere, but `## Work log` is the conventional spot).
-3. **Between sessions** — `session-teardown` appends a `### Session HH:MM` block under `## Work log` summarising the chat that just ended, before Alex opens a fresh conversation. May run multiple times.
-4. **Evening** — `daily-teardown` reads recently-modified vault files, fills `## Done today`, `## Blocked`, `## Retro`, then creates/updates the **next working day's** daily with new `## Planned tasks`, then runs the rollup.
+1. **Morning** — `daily-standup` reads `## Planned tasks` (plain bullets, no checkbox), prompts Alex, writes `## Schedule` with `- [ ]` checkboxes.
+2. **During the day** — Alex writes free-form notes in `## Work log`. Every entry is prefixed by its local time `HH:MM` (24h). When a Schedule line is completed it moves to `## Done today` as `- [x] ~~...~~` (checkbox checked AND text struck-through).
+3. **Between sessions** — `session-teardown` appends a timestamped bullet under `## Work log` summarising the chat that just ended, before Alex opens a fresh conversation. May run multiple times.
+4. **Evening** — `daily-teardown` reads recently-modified vault files, finalises `## Done today` (checking + striking through), fills `## Blocked` and `## Retro`, then creates/updates the **next working day's** daily with new `## Planned tasks` (no checkboxes), then runs the rollup.
 
 ## Frontmatter conventions (vault-wide)
 
