@@ -8,10 +8,13 @@ description: >
   like "fai il rollup", "archivia il daily", "rollup settimanale",
   "chiudi la settimana", "archivia il mese". The skill detects
   end-of-week, end-of-month, and end-of-year events and cascades the
-  archive accordingly. Always load vault-structure alongside this skill
-  for naming and folder rules.
+  archive accordingly. When end-of-week is detected, it invokes the
+  `weekly-review` skill BEFORE cascading the Weekly folder to Monthly,
+  so the resulting `Weekly/MM-DD/README.md` travels with the dailies.
+  Always load vault-structure alongside this skill for naming and folder
+  rules.
 metadata:
-  version: "0.1.0"
+  version: "0.2.0"
 ---
 
 # Rollup
@@ -68,15 +71,18 @@ mv "/home/alex/Documents/Obsidian Vault/Daily/2026-05-08.md" \
    "/home/alex/Documents/Obsidian Vault/Weekly/04-08/2026-05-08.md"
 ```
 
-### Step 3 — Detect end-of-week and cascade Weekly → Monthly
+### Step 3 — Detect end-of-week, write weekly review, cascade Weekly → Monthly
 
 For each `Weekly/<week_folder>/` directory after Step 2:
 
 - The week is **complete** if the latest daily in that folder is the Friday of that week (`monday + 4 days`), OR if today's date is past that Friday.
 - If complete:
-  1. Determine the **month** to file the week under: use the **Monday's month** (zero-padded `MM`).
-  2. Ensure `Monthly/<MM>/` exists.
-  3. Move the entire week folder: `mv Weekly/<week_folder> Monthly/<MM>/<week_folder>`.
+  1. **Invoke the `weekly-review` skill** passing the full path of `Weekly/<week_folder>/` as the target. `weekly-review` will read every daily in that folder, run a short interview with Alex, and write `Weekly/<week_folder>/README.md`. Wait for it to return before continuing — the README must be inside the folder before the cascade move.
+     - If `weekly-review` returns saying the README already exists and Alex chose not to integrate, that is fine — proceed with the cascade as-is.
+     - If Alex aborts the weekly review (says "non ora"), **stop the cascade for this week**. Do **not** move the folder to `Monthly/` without a review. Tell Alex: "Weekly review saltata, cartella `Weekly/<week_folder>/` rimane qui finché non la chiudi."
+  2. Determine the **month** to file the week under: use the **Monday's month** (zero-padded `MM`).
+  3. Ensure `Monthly/<MM>/` exists.
+  4. Move the entire week folder: `mv Weekly/<week_folder> Monthly/<MM>/<week_folder>`. The `README.md` written in step 1 travels with it.
 
 If the week straddles two months (Monday in April, Friday in May), the folder still goes under the Monday's month — this keeps the natural reading order.
 

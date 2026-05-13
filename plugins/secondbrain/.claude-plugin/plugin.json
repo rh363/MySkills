@@ -1,9 +1,9 @@
 {
   "name": "secondbrain",
-  "version": "0.4.0",
-  "description": "Gestisce il second brain di Alex (Obsidian vault): conoscenza della struttura del vault, teardown serale con interview e rollup, standup mattutino con scheduling, checkpoint per-sessione durante la giornata.",
+  "version": "0.5.0",
+  "description": "Gestisce il second brain di Alex (Obsidian vault): conoscenza della struttura del vault, teardown serale con interview e rollup, standup mattutino con scheduling, checkpoint per-sessione durante la giornata, weekly review automatica a fine settimana.",
   "author": {
     "name": "Alex Massaroni"
   },
-  "keywords": ["obsidian", "second-brain", "daily-notes", "teardown", "standup", "rollup", "session"]
+  "keywords": ["obsidian", "second-brain", "daily-notes", "teardown", "standup", "rollup", "session", "weekly-review"]
 }

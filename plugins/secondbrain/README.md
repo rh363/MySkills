@@ -9,6 +9,7 @@ Codifica la struttura del vault e fornisce i workflow giornalieri:
 - **Standup mattutino**: lettura dei planned tasks, prioritizzazione interattiva, scrittura di una sezione `## Schedule` nel daily di oggi.
 - **Session teardown**: checkpoint tra una sessione di chat e l'altra. Appende una o più voci timestamped (`- **HH:MM — titolo**: ...`) sotto `## Work log` riassumendo la sessione appena chiusa, senza pianificare il giorno dopo né fare rollup.
 - **Teardown serale**: chiusura della giornata. Conversazione libera + domande mirate, pianificazione task per il giorno target, e rollup automatico del daily appena chiuso nella struttura archivio.
+- **Weekly review**: sintesi di fine settimana. Legge tutti i daily della settimana e produce `Weekly/MM-DD/README.md` con highlights, done, carry-over, blocked, retro e priorità per la settimana prossima. Le carry-over vengono propagate nei `## Planned tasks` del lunedì successivo. Invocata automaticamente dal `rollup` a fine settimana, prima della cascata Weekly → Monthly.
 - **Rollup**: cascata progressiva Daily → Weekly → Monthly → Yearly. Invocata automaticamente dal teardown e disponibile manualmente.
 
 ## Componenti
@@ -21,6 +22,7 @@ Codifica la struttura del vault e fornisce i workflow giornalieri:
 | `daily-standup` | Azione | "standup", "pianifica oggi", "buongiorno" |
 | `session-teardown` | Azione | "chiudo la sessione", "wrap-up sessione", "checkpoint sessione" |
 | `daily-teardown` | Azione | "fai il teardown", "chiudo la giornata", "review serale" |
+| `weekly-review` | Azione | "weekly review", "review settimanale", "chiudo la settimana" (anche invocata da `rollup` a fine settimana) |
 | `rollup` | Azione | "fai il rollup", "archivia il daily" (anche invocata da `daily-teardown`) |
 
 ### Slash commands
@@ -61,5 +63,6 @@ Vedi le singole skill per i dettagli operativi:
 - `skills/daily-standup/SKILL.md`
 - `skills/session-teardown/SKILL.md`
 - `skills/daily-teardown/SKILL.md`
+- `skills/weekly-review/SKILL.md`
 - `skills/rollup/SKILL.md`
 - `commands/schedule.md`
