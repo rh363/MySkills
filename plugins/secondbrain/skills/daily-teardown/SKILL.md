@@ -13,7 +13,7 @@ description: >
   end-of-period is detected). Always load vault-structure alongside this
   skill.
 metadata:
-  version: "0.3.0"
+  version: "0.3.1"
 ---
 
 # Daily Teardown
@@ -72,7 +72,7 @@ Listen to Alex's answer fully before drilling down.
 
 After the free-form opening, ask 2–4 mirror questions that close the gaps you still have. Use AskUserQuestion only when there is a clear set of options; otherwise ask conversationally. Cover at minimum:
 
-- **What's done?** — items completed today (will go into `## Done today`).
+- **What's done?** — items completed today. Items that were in `## Schedule` get their checkbox flipped to `[x]` in place (stay in Schedule). Ad-hoc work that was not in the schedule goes into `## Done today`.
 - **What's blocked?** — items waiting on external input (`## Blocked`). Tag with `#blocked` and the cause.
 - **Retro/insights** — anything worth remembering for the future (`## Retro`). Optional.
 - **Tomorrow's priorities** — task list for the next working day.
@@ -83,14 +83,14 @@ If today is **Friday**, "tomorrow" = next Monday. If today is **Saturday/Sunday*
 
 Update `Daily/YYYY-MM-DD.md` (today's file) with the gathered content:
 
-- Fill `## Done today`. Each completed task is written as **both** a checked checkbox **and** struck-through text:
-  ```markdown
-  - [x] ~~Fix bug X (#project/cloud-firewall)~~
-  - [x] ~~Review PR ermes (#project/ermes)~~
-  ```
-  This applies to:
-  - items Alex explicitly mentioned as done during the gap-filling interview;
-  - any line in `## Schedule` that should now be considered completed — these are **moved** (not copied) from `## Schedule` to `## Done today`, with the `- [ ]` rewritten to `- [x] ~~...~~`. Drop the time slot prefix if it was something like `09:00–11:00` (keep only the task description); keep `#project/...` tags. If Alex completed only part of a Schedule line (e.g. half a long block), split it into a done part and a remaining one (the remaining one stays in `## Schedule` as `- [ ]`).
+- Handle completed work in two distinct ways depending on its origin:
+  1. **Items that were in `## Schedule`** — flip the checkbox **in place** from `- [ ]` to `- [x]`. Do **not** move the line out of `## Schedule`, do **not** strike it through (`~~...~~` breaks Obsidian rendering). The morning plan must remain visible as memory. If Alex completed only part of a Schedule line (e.g. half a long block), split it into a checked part and a remaining `- [ ]` part — both stay in `## Schedule`.
+  2. **Ad-hoc work that was NOT in `## Schedule`** — write it into `## Done today` as a plain checked checkbox, no strikethrough:
+     ```markdown
+     - [x] Fix bug X (#project/cloud-firewall)
+     - [x] Review PR ermes (#project/ermes)
+     ```
+  Never use `~~...~~` strikethrough anywhere — it breaks Obsidian rendering. Use plain `- [x]` only.
 - Fill `## Blocked` with bullets, each containing a `#blocked` tag and the unblocking action.
 - Fill `## Retro` (skip if empty).
 - Verify `## Work log` entries are well-formed — each bullet should be prefixed by its local time `HH:MM`, in the canonical form `- **HH:MM — <title>**: <body>`. Do **not** rewrite Alex's prose, but if a Work log bullet is missing the time prefix, ask Alex what time it was and add it. Never invent a time.

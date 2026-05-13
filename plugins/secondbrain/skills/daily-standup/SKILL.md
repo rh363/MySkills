@@ -10,7 +10,7 @@ description: >
   priorities and time estimates, and writes a `## Schedule` section into
   today's daily note. Always load vault-structure alongside this skill.
 metadata:
-  version: "0.3.0"
+  version: "0.3.1"
 ---
 
 # Daily Standup
@@ -74,7 +74,7 @@ Insert a `## Schedule` section right after the H1 title, before `## Work log`. E
 
 Rules:
 
-- Every line is a `- [ ]` checkbox. When the task is completed during the day, it moves to `## Done today` as `- [x] ~~...~~` (checkbox checked **and** text struck-through). `daily-teardown` formalises this move at end of day; Alex may also do it manually mid-day.
+- Every line is a `- [ ]` checkbox. When the task is completed during the day, the checkbox is flipped **in place** to `- [x]` (plain text — **no strikethrough**, `~~...~~` breaks Obsidian rendering). The line stays in `## Schedule` so the plan you made in the morning remains visible as memory. `## Done today` is reserved for ad-hoc work that was *not* in the schedule.
 - Order strictly by P0 → P1 → P2, then by chronological time.
 - If Alex did not give clock times, replace the time slot with `~30min` / `~1h` etc.
 - Preserve any pre-existing `## Schedule` section if Alex re-runs the standup mid-morning — append a `### Update HH:MM` block instead of overwriting.
