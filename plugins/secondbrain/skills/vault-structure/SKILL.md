@@ -12,7 +12,7 @@ description: >
   source of truth for vault layout. The `session-teardown` skill (mid-day
   per-session checkpoint into `## Work log`) also depends on this skill.
 metadata:
-  version: "0.2.0"
+  version: "0.3.0"
 ---
 
 # Vault Structure

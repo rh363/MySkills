@@ -10,7 +10,7 @@ description: >
   priorities and time estimates, and writes a `## Schedule` section into
   today's daily note. Always load vault-structure alongside this skill.
 metadata:
-  version: "0.2.0"
+  version: "0.3.0"
 ---
 
 # Daily Standup

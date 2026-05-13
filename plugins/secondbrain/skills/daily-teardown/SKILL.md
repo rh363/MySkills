@@ -13,7 +13,7 @@ description: >
   end-of-period is detected). Always load vault-structure alongside this
   skill.
 metadata:
-  version: "0.2.0"
+  version: "0.3.0"
 ---
 
 # Daily Teardown

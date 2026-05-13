@@ -13,7 +13,7 @@ description: >
   NOT invoke the rollup — those stay with `daily-teardown`. Always load
   vault-structure alongside this skill.
 metadata:
-  version: "0.2.0"
+  version: "0.3.0"
 ---
 
 # Session Teardown
