@@ -13,7 +13,7 @@ description: >
   end-of-period is detected). Always load vault-structure alongside this
   skill.
 metadata:
-  version: "0.3.1"
+  version: "0.3.2"
 ---
 
 # Daily Teardown
@@ -72,7 +72,7 @@ Listen to Alex's answer fully before drilling down.
 
 After the free-form opening, ask 2–4 mirror questions that close the gaps you still have. Use AskUserQuestion only when there is a clear set of options; otherwise ask conversationally. Cover at minimum:
 
-- **What's done?** — items completed today. Items that were in `## Schedule` get their checkbox flipped to `[x]` in place (stay in Schedule). Ad-hoc work that was not in the schedule goes into `## Done today`.
+- **What's done?** — items completed today. Items that were in `## Schedule` get their checkbox flipped to `[x]` in place (stay in Schedule) **and** are also copied into `## Done today`. Ad-hoc work that was not in the schedule goes only into `## Done today`. `## Done today` is the flat consolidated list of everything completed.
 - **What's blocked?** — items waiting on external input (`## Blocked`). Tag with `#blocked` and the cause.
 - **Retro/insights** — anything worth remembering for the future (`## Retro`). Optional.
 - **Tomorrow's priorities** — task list for the next working day.
@@ -83,9 +83,13 @@ If today is **Friday**, "tomorrow" = next Monday. If today is **Saturday/Sunday*
 
 Update `Daily/YYYY-MM-DD.md` (today's file) with the gathered content:
 
-- Handle completed work in two distinct ways depending on its origin:
-  1. **Items that were in `## Schedule`** — flip the checkbox **in place** from `- [ ]` to `- [x]`. Do **not** move the line out of `## Schedule`, do **not** strike it through (`~~...~~` breaks Obsidian rendering). The morning plan must remain visible as memory. If Alex completed only part of a Schedule line (e.g. half a long block), split it into a checked part and a remaining `- [ ]` part — both stay in `## Schedule`.
-  2. **Ad-hoc work that was NOT in `## Schedule`** — write it into `## Done today` as a plain checked checkbox, no strikethrough:
+- Handle completed work in two coordinated steps:
+  1. **Update `## Schedule` in place** — for every Schedule line that is now complete, flip its checkbox from `- [ ]` to `- [x]`. Do **not** move the line out of `## Schedule`, do **not** strike it through (`~~...~~` breaks Obsidian rendering). The morning plan must remain visible as memory. If Alex completed only part of a Schedule line (e.g. half a long block), split it into a checked part and a remaining `- [ ]` part — both stay in `## Schedule`.
+  2. **Fill `## Done today`** as the flat consolidated list of everything completed today. This includes:
+     - every Schedule item completed today (copied, not moved — they remain in `## Schedule`). Drop the time-slot prefix when copying (e.g. `09:00–11:00 — Task A` → `Task A`); keep `#project/...` tags.
+     - every ad-hoc task Alex mentioned as done during the interview that was not in `## Schedule`.
+
+     Each entry is a plain checked checkbox, no strikethrough:
      ```markdown
      - [x] Fix bug X (#project/cloud-firewall)
      - [x] Review PR ermes (#project/ermes)

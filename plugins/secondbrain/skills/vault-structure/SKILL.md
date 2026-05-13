@@ -12,7 +12,7 @@ description: >
   source of truth for vault layout. The `session-teardown` skill (mid-day
   per-session checkpoint into `## Work log`) also depends on this skill.
 metadata:
-  version: "0.3.1"
+  version: "0.3.2"
 ---
 
 # Vault Structure
@@ -110,7 +110,7 @@ tags: [daily]
 
 ## Schedule
 <!-- written by daily-standup in the morning -->
-<!-- every line is a checkbox; when the task is finished the checkbox is flipped IN PLACE to `- [x]` (no strikethrough — `~~...~~` breaks Obsidian rendering). Completed lines stay in ## Schedule so the morning plan remains visible as memory. -->
+<!-- every line is a checkbox; when the task is finished the checkbox is flipped IN PLACE to `- [x]` (no strikethrough — `~~...~~` breaks Obsidian rendering). Completed lines stay in ## Schedule so the morning plan remains visible as memory, and are ALSO copied into ## Done today. -->
 - [ ] 09:00–11:00 — Task A
 - [ ] 11:00–12:00 — Task B
 
@@ -122,9 +122,9 @@ tags: [daily]
 - **11:30 — Refactor billing service**: Estratto `InvoiceCalculator` come port. Restano da migrare 2 use case. (#project/billing)
 
 ## Done today
-<!-- written by daily-teardown — ONLY for ad-hoc work that was NOT in ## Schedule. -->
-<!-- Tasks that were in ## Schedule stay there; their checkbox is flipped to [x] in place. -->
-<!-- NO strikethrough — `~~...~~` breaks Obsidian rendering. Plain `- [x]` only. -->
+<!-- written by daily-teardown — flat consolidated list of EVERYTHING completed today. -->
+<!-- Includes BOTH items that were in ## Schedule (also kept there, with their box checked in place) AND ad-hoc work that was not in the schedule. -->
+<!-- NO strikethrough — `~~...~~` breaks Obsidian rendering. Plain `- [x]` only. Drop time-slot prefixes (e.g. `09:00–11:00`) when copying from Schedule; keep `#project/...` tags. -->
 - [x] Fix bug X (#project/cloud-firewall)
 - [x] Review PR ermes (#project/ermes)
 
@@ -147,9 +147,9 @@ tags: [daily]
 The same file is written progressively across the day:
 
 1. **Morning** — `daily-standup` reads `## Planned tasks` (plain bullets, no checkbox), prompts Alex, writes `## Schedule` with `- [ ]` checkboxes.
-2. **During the day** — Alex writes free-form notes in `## Work log`. Every entry is prefixed by its local time `HH:MM` (24h). When a Schedule line is completed its checkbox is flipped **in place** from `- [ ]` to `- [x]` (no strikethrough, line stays in `## Schedule`). `## Done today` is only used for ad-hoc work that was not in the schedule.
+2. **During the day** — Alex writes free-form notes in `## Work log`. Every entry is prefixed by its local time `HH:MM` (24h). When a Schedule line is completed its checkbox is flipped **in place** from `- [ ]` to `- [x]` (no strikethrough, line stays in `## Schedule`) **and** the same task is **also copied** as `- [x]` into `## Done today`. `## Done today` is therefore the flat union of completed Schedule items + ad-hoc work that was not in the schedule.
 3. **Between sessions** — `session-teardown` appends a timestamped bullet under `## Work log` summarising the chat that just ended, before Alex opens a fresh conversation. May run multiple times.
-4. **Evening** — `daily-teardown` reads recently-modified vault files, finalises `## Done today` (checking + striking through), fills `## Blocked` and `## Retro`, then creates/updates the **next working day's** daily with new `## Planned tasks` (no checkboxes), then runs the rollup.
+4. **Evening** — `daily-teardown` reads recently-modified vault files, finalises `## Done today` as the consolidated `[x]` list of everything completed (no strikethrough), fills `## Blocked` and `## Retro`, then creates/updates the **next working day's** daily with new `## Planned tasks` (no checkboxes), then runs the rollup.
 
 ## Frontmatter conventions (vault-wide)
 
